@@ -22,7 +22,15 @@ const App = () => {
   return (
     <div className="App">
       <PostForm create={handleCreatePost} />
-      <PostList posts={posts} title="Posts list 1" remove={handleRemovePost} />
+      {posts.length ? (
+        <PostList
+          posts={posts}
+          title="Posts list 1"
+          remove={handleRemovePost}
+        />
+      ) : (
+        <h1 style={{ textAlign: 'center' }}>Posts not found</h1>
+      )}
     </div>
   )
 }
