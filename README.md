@@ -1,0 +1,1 @@
+# extented_blog-list-frontend
