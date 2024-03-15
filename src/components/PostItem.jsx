@@ -1,9 +1,9 @@
-const PostItem = ({ post }) => {
+const PostItem = ({ post, number }) => {
   return (
     <div className="post">
       <div className="post__content">
         <strong>
-          {post.id} {post.title}
+          {number} {post.title}
         </strong>
         <div>{post.body}</div>
       </div>
