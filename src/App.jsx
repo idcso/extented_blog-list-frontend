@@ -3,6 +3,8 @@ import { useMemo, useState } from 'react'
 import PostList from './components/PostList'
 import PostForm from './components/PostForm'
 import PostFilter from './components/PostFilter'
+import MyModal from './components/UI/modal/MyModal'
+import MyButton from './components/UI/button/MyButton'
 
 const App = () => {
   const [posts, setPosts] = useState([
@@ -12,9 +14,11 @@ const App = () => {
     { id: 4, title: 'Post title 4', body: 'Post description' },
   ])
   const [filter, setFilter] = useState({ sort: '', search: '' })
+  const [modal, setModal] = useState(false)
 
   const handleCreatePost = (newPost) => {
     setPosts([...posts, newPost])
+    setModal(false)
   }
 
   const handleRemovePost = (id) => {
@@ -39,7 +43,12 @@ const App = () => {
 
   return (
     <div className="App">
-      <PostForm create={handleCreatePost} />
+      <MyButton style={{ marginTop: 20 }} onClick={() => setModal(true)}>
+        Create post
+      </MyButton>
+      <MyModal visible={modal} setVisible={setModal}>
+        <PostForm create={handleCreatePost} />
+      </MyModal>
       <hr style={{ margin: '15px 0' }} />
       <PostFilter filter={filter} setFilter={setFilter} />
       <PostList
