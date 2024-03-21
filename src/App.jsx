@@ -7,6 +7,7 @@ import MyModal from './components/UI/modal/MyModal'
 import MyButton from './components/UI/button/MyButton'
 import { usePosts } from './hooks/usePosts'
 import postService from './API/postService'
+import Loader from './components/UI/loader/Loader'
 
 const App = () => {
   const [posts, setPosts] = useState([
@@ -33,6 +34,7 @@ const App = () => {
   ])
   const [filter, setFilter] = useState({ sort: '', search: '' })
   const [modal, setModal] = useState(false)
+  const [postsLoaded, setPostsLoaded] = useState(false)
   const searchedAndSortedPosts = usePosts(posts, filter.sort, filter.search)
 
   useEffect(() => {
@@ -40,8 +42,10 @@ const App = () => {
   }, [])
 
   const fetchPosts = async () => {
+    setPostsLoaded(true)
     const posts = await postService.getAll()
     setPosts(posts)
+    setPostsLoaded(false)
   }
 
   const handleCreatePost = (newPost) => {
@@ -63,11 +67,19 @@ const App = () => {
       </MyModal>
       <hr style={{ margin: '15px 0' }} />
       <PostFilter filter={filter} setFilter={setFilter} />
-      <PostList
-        posts={searchedAndSortedPosts}
-        title="Posts list 1"
-        remove={handleRemovePost}
-      />
+      {postsLoaded ? (
+        <div
+          style={{ display: 'flex', justifyContent: 'center', marginTop: 30 }}
+        >
+          <Loader />
+        </div>
+      ) : (
+        <PostList
+          posts={searchedAndSortedPosts}
+          title="Posts list"
+          remove={handleRemovePost}
+        />
+      )}
     </div>
   )
 }
