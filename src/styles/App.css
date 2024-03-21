@@ -36,3 +36,18 @@
   transform: translate(-350px);
   transition: all 500ms ease-in;
 }
+
+.pagination__wrapper {
+  margin: 20px 0;
+}
+.page {
+  padding: 10px;
+  border: 2px solid purple;
+  margin-right: 3px;
+  cursor: pointer;
+}
+.page__active {
+  background-color: rgb(45, 45, 131);
+  color: white;
+  font-weight: bold;
+}
