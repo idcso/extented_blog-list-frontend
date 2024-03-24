@@ -10,4 +10,14 @@ const getAll = async (limit = 10, page = 1) => {
   return response
 }
 
-export default { getAll }
+const getById = async (id) => {
+  const response = await axios.get(`https://jsonplaceholder.typicode.com/posts/${id}`)
+  return response
+}
+
+const getCommentsById = async (id) => {
+  const response = await axios.get(`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
+  return response
+}
+
+export default { getAll, getById, getCommentsById }
